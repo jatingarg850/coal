@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import Head from 'next/head'
 import Image from 'next/image'
+import SEO from '../components/SEO'
 
 export default function Home() {
   const [currentSlide, setCurrentSlide] = useState(0)
@@ -131,12 +132,11 @@ export default function Home() {
 
   return (
     <>
-      <Head>
-        <title>Jai Mata Di Coals - Premium Coal Supplier</title>
-        <meta name="description" content="Leading coal supplier providing high-quality steam coal, coking coal, and thermal coal for industries across India." />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
+      <SEO 
+        title="Jai Mata Di Coals - Premium Coal Supplier in India"
+        description="Leading coal supplier providing high-quality steam coal, coking coal, thermal coal, and anthracite coal for industries across India. Guaranteed quality and timely delivery."
+        keywords="coal supplier India, steam coal, coking coal, thermal coal, anthracite coal, industrial coal, power plant coal, steel industry coal"
+      />
 
       {/* Top Bar */}
       <div className="bg-slate-800 text-white py-2 text-sm">

@@ -1,16 +1,40 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
+  swcMinify: true,
   images: {
     domains: ['localhost'],
-    unoptimized: true
+    formats: ['image/webp', 'image/avif'],
+    deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 3840],
+    imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
   },
+  compress: true,
+  poweredByHeader: false,
+  generateEtags: false,
   env: {
-    MONGODB_URI: 'mongodb+srv://ds8314880:dtRD1Dnvq0ggbHT0@cluster0.b2g3ln2.mongodb.net/adicoals?retryWrites=true&w=majority&appName=Cluster0',
-    JWT_SECRET: 'your-super-secret-jwt-key-change-this-in-production',
-    NEXTAUTH_SECRET: 'your-nextauth-secret-key',
-    NEXTAUTH_URL: 'http://localhost:3000'
-  }
+    CUSTOM_KEY: process.env.CUSTOM_KEY,
+  },
+  async headers() {
+    return [
+      {
+        source: '/(.*)',
+        headers: [
+          {
+            key: 'X-Frame-Options',
+            value: 'DENY',
+          },
+          {
+            key: 'X-Content-Type-Options',
+            value: 'nosniff',
+          },
+          {
+            key: 'Referrer-Policy',
+            value: 'origin-when-cross-origin',
+          },
+        ],
+      },
+    ]
+  },
 }
 
 module.exports = nextConfig
