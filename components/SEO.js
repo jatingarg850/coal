@@ -60,7 +60,7 @@ export default function SEO({
             "logo": `${url}/favicon.ico`,
             "contactPoint": {
               "@type": "ContactPoint",
-              "telephone": "+91-XXXXXXXXXX",
+              "telephone": "+91-9838931189",
               "contactType": "customer service",
               "areaServed": "IN",
               "availableLanguage": ["English", "Hindi"]

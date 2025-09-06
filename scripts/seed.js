@@ -1,9 +1,91 @@
 const mongoose = require('mongoose')
-require('dotenv').config({ path: '.env.local' })
+const path = require('path')
+const bcrypt = require('bcryptjs')
 
-// Import models
-const Product = require('../models/Product')
-const Admin = require('../models/Admin')
+// Load environment variables
+require('dotenv').config({ path: path.join(__dirname, '..', '.env.local') })
+
+// Define schemas directly in the seed script
+const ProductSchema = new mongoose.Schema({
+  name: {
+    type: String,
+    required: true,
+    trim: true
+  },
+  description: {
+    type: String,
+    required: true
+  },
+  image: {
+    type: String,
+    required: true
+  },
+  price: {
+    type: String,
+    default: 'Contact for Price'
+  },
+  category: {
+    type: String,
+    enum: ['Premium Steam Coal', 'Indian Coal', 'Indonesian Coal', 'Pet Coke'],
+    required: true
+  },
+  specifications: {
+    calorificValue: String,
+    ashContent: String,
+    moistureContent: String,
+    sulphurContent: String
+  },
+  featured: {
+    type: Boolean,
+    default: false
+  },
+  active: {
+    type: Boolean,
+    default: true
+  }
+}, {
+  timestamps: true
+})
+
+const AdminSchema = new mongoose.Schema({
+  username: {
+    type: String,
+    required: true,
+    unique: true,
+    trim: true
+  },
+  email: {
+    type: String,
+    required: true,
+    unique: true,
+    trim: true
+  },
+  password: {
+    type: String,
+    required: true,
+    minlength: 6
+  },
+  role: {
+    type: String,
+    enum: ['admin', 'super_admin'],
+    default: 'admin'
+  },
+  active: {
+    type: Boolean,
+    default: true
+  }
+}, {
+  timestamps: true
+})
+
+AdminSchema.pre('save', async function(next) {
+  if (!this.isModified('password')) return next()
+  this.password = await bcrypt.hash(this.password, 12)
+  next()
+})
+
+const Product = mongoose.model('Product', ProductSchema)
+const Admin = mongoose.model('Admin', AdminSchema)
 
 const coalImages = [
   '/images/WhatsApp Image 2025-09-04 at 14.10.26_3f88efa3.jpg',
@@ -19,9 +101,9 @@ const coalImages = [
 const sampleProducts = [
   {
     name: 'Premium Steam Coal',
-    description: 'High-quality steam coal with excellent calorific value, perfect for industrial applications and power generation.',
+    description: 'High-quality premium steam coal with excellent calorific value, perfect for industrial applications and power generation.',
     image: coalImages[0],
-    category: 'Steam Coal',
+    category: 'Premium Steam Coal',
     featured: true,
     specifications: {
       calorificValue: '6000-6500 kcal/kg',
@@ -31,70 +113,31 @@ const sampleProducts = [
     }
   },
   {
-    name: 'Superior Coking Coal',
-    description: 'Premium grade coking coal specifically designed for steel industry applications with low ash content.',
+    name: 'Indian Coal Grade A',
+    description: 'Superior grade Indian coal sourced from premium mines across India with consistent quality.',
     image: coalImages[1],
-    category: 'Coking Coal',
+    category: 'Indian Coal',
     featured: true,
     specifications: {
-      calorificValue: '7000-7500 kcal/kg',
-      ashContent: '8-12%',
-      moistureContent: '6-8%',
+      calorificValue: '5500-6200 kcal/kg',
+      ashContent: '15-20%',
+      moistureContent: '8-12%',
       sulphurContent: '0.6-1.0%'
     }
   },
   {
-    name: 'Efficient Thermal Coal',
-    description: 'High-efficiency thermal coal optimized for power generation with consistent quality and performance.',
+    name: 'Indonesian Coal Premium',
+    description: 'High-quality Indonesian coal with low ash content and high calorific value for industrial use.',
     image: coalImages[2],
-    category: 'Thermal Coal',
+    category: 'Indonesian Coal',
     featured: true,
     specifications: {
-      calorificValue: '5500-6000 kcal/kg',
-      ashContent: '15-18%',
-      moistureContent: '10-12%',
+      calorificValue: '6200-6800 kcal/kg',
+      ashContent: '8-12%',
+      moistureContent: '6-10%',
       sulphurContent: '0.4-0.7%'
     }
   },
-  {
-    name: 'Premium Anthracite Coal',
-    description: 'Highest grade anthracite coal with exceptional calorific value and minimal ash content.',
-    image: coalImages[3],
-    category: 'Anthracite Coal',
-    featured: true,
-    specifications: {
-      calorificValue: '7500-8000 kcal/kg',
-      ashContent: '5-8%',
-      moistureContent: '3-5%',
-      sulphurContent: '0.3-0.5%'
-    }
-  },
-  {
-    name: 'Industrial Steam Coal',
-    description: 'Reliable steam coal for various industrial applications with consistent quality standards.',
-    image: coalImages[4],
-    category: 'Steam Coal',
-    featured: false,
-    specifications: {
-      calorificValue: '5800-6200 kcal/kg',
-      ashContent: '14-16%',
-      moistureContent: '9-11%',
-      sulphurContent: '0.6-0.9%'
-    }
-  },
-  {
-    name: 'Metallurgical Coking Coal',
-    description: 'Specialized coking coal for metallurgical processes with optimal coking properties.',
-    image: coalImages[5],
-    category: 'Coking Coal',
-    featured: false,
-    specifications: {
-      calorificValue: '6800-7200 kcal/kg',
-      ashContent: '10-13%',
-      moistureContent: '7-9%',
-      sulphurContent: '0.7-1.1%'
-    }
-  }
 ]
 
 async function seedDatabase() {
@@ -103,10 +146,7 @@ async function seedDatabase() {
     await mongoose.connect(process.env.MONGODB_URI)
     console.log('Connected to MongoDB')
 
-    // Clear existing data
-    await Product.deleteMany({})
-    await Admin.deleteMany({})
-    console.log('Cleared existing data')
+    
 
     // Create products
     const products = await Product.insertMany(sampleProducts)

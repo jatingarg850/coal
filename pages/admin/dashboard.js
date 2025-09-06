@@ -26,7 +26,7 @@ export default function AdminDashboard() {
     name: '',
     description: '',
     image: coalImages[0],
-    category: 'Steam Coal',
+    category: 'Premium Steam Coal',
     featured: false
   })
 
@@ -73,7 +73,7 @@ export default function AdminDashboard() {
           name: '',
           description: '',
           image: coalImages[0],
-          category: 'Steam Coal',
+          category: 'Premium Steam Coal',
           featured: false
         })
         fetchData()
@@ -268,10 +268,10 @@ export default function AdminDashboard() {
                     onChange={(e) => setNewProduct({...newProduct, category: e.target.value})}
                     className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-orange-500"
                   >
-                    <option value="Steam Coal">Steam Coal</option>
-                    <option value="Coking Coal">Coking Coal</option>
-                    <option value="Thermal Coal">Thermal Coal</option>
-                    <option value="Anthracite Coal">Anthracite Coal</option>
+                    <option value="Premium Steam Coal">Premium Steam Coal</option>
+                    <option value="Indian Coal">Indian Coal</option>
+                    <option value="Indonesian Coal">Indonesian Coal</option>
+                    <option value="Pet Coke">Pet Coke</option>
                   </select>
                 </div>
                 <div className="flex items-center">

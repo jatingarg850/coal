@@ -9,7 +9,7 @@ export default function Products() {
   const [selectedCategory, setSelectedCategory] = useState('All')
   const [loading, setLoading] = useState(true)
 
-  const categories = ['All', 'Steam Coal', 'Coking Coal', 'Thermal Coal', 'Anthracite Coal']
+  const categories = ['All', 'Premium Steam Coal', 'Indian Coal', 'Indonesian Coal', 'Pet Coke']
 
   useEffect(() => {
     fetchProducts()
@@ -58,7 +58,7 @@ export default function Products() {
         <div className="container mx-auto px-4">
           <div className="flex justify-between items-center py-4">
             <Link href="/" className="flex items-center space-x-3">
-              <div className="w-12 h-12 bg-gradient-to-r from-orange-500 to-red-600 rounded-full flex items-center justify-center">
+              <div className="w-12 h-12 bg-gradient-to-r from-orange-400 to-orange-500 rounded-full flex items-center justify-center">
                 <span className="text-white font-bold text-xl">J</span>
               </div>
               <div>
@@ -78,7 +78,7 @@ export default function Products() {
       </header>
 
       {/* Hero Section */}
-      <section className="bg-gradient-to-r from-orange-500 to-red-600 text-white py-20">
+      <section className="bg-gradient-to-r from-orange-400 to-orange-500 text-white py-20">
         <div className="container mx-auto px-4 text-center">
           <h1 className="text-4xl md:text-6xl font-bold mb-6">Our Coal Products</h1>
           <p className="text-xl md:text-2xl text-orange-100 max-w-3xl mx-auto">

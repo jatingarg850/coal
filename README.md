@@ -248,8 +248,8 @@ See `DEPLOYMENT.md` for detailed guides on:
 ## 📞 Support
 
 For support and questions:
-- Email: info@jaimatadicoals.com
-- Phone: +91-XXXXXXXXXX
+- Email: jaimatadiservices2019@gmail.com
+- Phone: +91-9838931189
 
 ## 📄 License
 

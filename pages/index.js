@@ -46,50 +46,50 @@ export default function Home() {
         {
           _id: '1',
           name: 'Premium Steam Coal',
-          description: 'High-quality steam coal with excellent calorific value for power generation',
+          description: 'High-quality premium steam coal with excellent calorific value for power generation and industrial use',
           image: coalImages[0],
-          category: 'Steam Coal',
+          category: 'Premium Steam Coal',
           specifications: { calorificValue: '6000-6500 kcal/kg', ashContent: '12-15%' }
         },
         {
           _id: '2',
-          name: 'Coking Coal',
-          description: 'Superior grade coking coal for steel industry applications',
+          name: 'Indian Coal',
+          description: 'Superior grade Indian coal sourced from premium mines across India',
           image: coalImages[1],
-          category: 'Coking Coal',
-          specifications: { calorificValue: '7000-7500 kcal/kg', ashContent: '8-12%' }
+          category: 'Indian Coal',
+          specifications: { calorificValue: '5500-6200 kcal/kg', ashContent: '15-20%' }
         },
         {
           _id: '3',
-          name: 'Thermal Coal',
-          description: 'Efficient thermal coal for industrial heating applications',
+          name: 'Indonesian Coal',
+          description: 'High-quality Indonesian coal with low ash content and high calorific value',
           image: coalImages[2],
-          category: 'Thermal Coal',
-          specifications: { calorificValue: '5500-6000 kcal/kg', ashContent: '15-18%' }
+          category: 'Indonesian Coal',
+          specifications: { calorificValue: '6200-6800 kcal/kg', ashContent: '8-12%' }
         },
         {
           _id: '4',
-          name: 'Anthracite Coal',
-          description: 'Premium anthracite coal with minimal ash content',
+          name: 'Pet Coke',
+          description: 'Premium petroleum coke for industrial applications with high carbon content',
           image: coalImages[3],
-          category: 'Anthracite Coal',
-          specifications: { calorificValue: '7500-8000 kcal/kg', ashContent: '5-8%' }
+          category: 'Pet Coke',
+          specifications: { calorificValue: '8000-8500 kcal/kg', ashContent: '0.5-2%' }
         },
         {
           _id: '5',
-          name: 'Industrial Steam Coal',
-          description: 'Reliable steam coal for various industrial applications',
+          name: 'Industrial Grade Coal',
+          description: 'Reliable industrial grade coal for various manufacturing applications',
           image: coalImages[4],
-          category: 'Steam Coal',
-          specifications: { calorificValue: '5800-6200 kcal/kg', ashContent: '14-16%' }
+          category: 'Indian Coal',
+          specifications: { calorificValue: '5800-6200 kcal/kg', ashContent: '14-18%' }
         },
         {
           _id: '6',
-          name: 'Metallurgical Coal',
-          description: 'Specialized coal for metallurgical processes',
+          name: 'Export Quality Coal',
+          description: 'Export quality coal meeting international standards and specifications',
           image: coalImages[5],
-          category: 'Coking Coal',
-          specifications: { calorificValue: '6800-7200 kcal/kg', ashContent: '10-13%' }
+          category: 'Indonesian Coal',
+          specifications: { calorificValue: '6500-7000 kcal/kg', ashContent: '6-10%' }
         }
       ])
     }
@@ -142,8 +142,8 @@ export default function Home() {
       <div className="bg-slate-800 text-white py-2 text-sm">
         <div className="container mx-auto px-4 flex justify-between items-center">
           <div className="flex space-x-6">
-            <span>📧 info@jaimatadicoals.com</span>
-            <span>📞 +91-XXXXXXXXXX</span>
+            <span>📧 jaimatadiservices2019@gmail.com</span>
+            <span>📞 +91-9838931189</span>
           </div>
           <div className="flex space-x-4">
             <span>🕒 Mon-Sat: 9:00 AM - 6:00 PM</span>
@@ -281,7 +281,7 @@ export default function Home() {
       </section>
 
       {/* Stats Section */}
-      <section className="py-16 bg-gradient-to-r from-orange-500 to-red-600 text-white">
+      <section className="py-16 bg-gradient-to-r from-orange-400 to-orange-500 text-white">
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
             <div>
@@ -293,8 +293,8 @@ export default function Home() {
               <div className="text-orange-100">Years Experience</div>
             </div>
             <div>
-              <div className="text-4xl font-bold mb-2">1000+</div>
-              <div className="text-orange-100">Tons Delivered</div>
+              <div className="text-4xl font-bold mb-2">10000+</div>
+              <div className="text-orange-100">Tonnes Delivered</div>
             </div>
             <div>
               <div className="text-4xl font-bold mb-2">24/7</div>
@@ -559,9 +559,9 @@ export default function Home() {
                   <div>
                     <h4 className="font-semibold text-lg mb-1">Office Address</h4>
                     <p className="text-gray-300">
-                      [Your Complete Business Address]<br />
-                      [City, State - PIN Code]<br />
-                      India
+                      Ward No 5, House No 568, Oblic 44<br />
+                      Santaji Nagar, Kanhan, Nagpur - 441401<br />
+                      Maharashtra, India
                     </p>
                   </div>
                 </div>
@@ -573,8 +573,8 @@ export default function Home() {
                   <div>
                     <h4 className="font-semibold text-lg mb-1">Phone Numbers</h4>
                     <p className="text-gray-300">
-                      +91-XXXXXXXXXX (Primary)<br />
-                      +91-XXXXXXXXXX (Secondary)
+                      +91-9838931189 (Primary)<br />
+                      +91-9307787702 (Secondary)
                     </p>
                   </div>
                 </div>
@@ -586,8 +586,8 @@ export default function Home() {
                   <div>
                     <h4 className="font-semibold text-lg mb-1">Email Address</h4>
                     <p className="text-gray-300">
-                      info@jaimatadicoals.com<br />
-                      sales@jaimatadicoals.com
+                      jaimatadiservices2019@gmail.com<br />
+                      jaimatadiservices2019@gmail.com
                     </p>
                   </div>
                 </div>
@@ -666,10 +666,10 @@ export default function Home() {
                     className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent"
                   >
                     <option value="General Inquiry">General Inquiry</option>
-                    <option value="Steam Coal">Steam Coal</option>
-                    <option value="Coking Coal">Coking Coal</option>
-                    <option value="Thermal Coal">Thermal Coal</option>
-                    <option value="Anthracite Coal">Anthracite Coal</option>
+                    <option value="Premium Steam Coal">Premium Steam Coal</option>
+                    <option value="Indian Coal">Indian Coal</option>
+                    <option value="Indonesian Coal">Indonesian Coal</option>
+                    <option value="Pet Coke">Pet Coke</option>
                   </select>
                 </div>
 
@@ -703,7 +703,7 @@ export default function Home() {
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
             <div>
               <div className="flex items-center space-x-3 mb-6">
-                <div className="w-12 h-12 bg-gradient-to-r from-orange-500 to-red-600 rounded-full flex items-center justify-center">
+                <div className="w-12 h-12 bg-gradient-to-r from-orange-400 to-orange-500 rounded-full flex items-center justify-center">
                   <span className="text-white font-bold text-xl">J</span>
                 </div>
                 <div>
@@ -741,11 +741,11 @@ export default function Home() {
             <div>
               <h4 className="text-lg font-semibold mb-6">Our Products</h4>
               <ul className="space-y-3">
-                <li><span className="text-gray-400">Steam Coal</span></li>
-                <li><span className="text-gray-400">Coking Coal</span></li>
-                <li><span className="text-gray-400">Thermal Coal</span></li>
-                <li><span className="text-gray-400">Anthracite Coal</span></li>
-                <li><span className="text-gray-400">Industrial Coal</span></li>
+                <li><span className="text-gray-400">Premium Steam Coal</span></li>
+                <li><span className="text-gray-400">Indian Coal</span></li>
+                <li><span className="text-gray-400">Indonesian Coal</span></li>
+                <li><span className="text-gray-400">Pet Coke</span></li>
+                <li><span className="text-gray-400">Industrial Grade Coal</span></li>
               </ul>
             </div>
 
@@ -756,18 +756,18 @@ export default function Home() {
                   <span className="text-orange-500 mt-1">📍</span>
                   <div>
                     <p className="text-gray-400 text-sm">
-                      [Your Business Address]<br />
-                      [City, State - PIN Code]
+                      Ward No 5, House No 568, Oblic 44<br />
+                      Santaji Nagar, Kanhan, Nagpur - 441401
                     </p>
                   </div>
                 </div>
                 <div className="flex items-center space-x-3">
                   <span className="text-orange-500">📞</span>
-                  <p className="text-gray-400 text-sm">+91-XXXXXXXXXX</p>
+                  <p className="text-gray-400 text-sm">+91-9838931189</p>
                 </div>
                 <div className="flex items-center space-x-3">
                   <span className="text-orange-500">✉️</span>
-                  <p className="text-gray-400 text-sm">info@jaimatadicoals.com</p>
+                  <p className="text-gray-400 text-sm">jaimatadiservices2019@gmail.com</p>
                 </div>
               </div>
             </div>

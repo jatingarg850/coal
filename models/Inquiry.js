@@ -25,7 +25,7 @@ const InquirySchema = new mongoose.Schema({
   },
   productInterest: {
     type: String,
-    enum: ['Steam Coal', 'Coking Coal', 'Thermal Coal', 'Anthracite Coal', 'General Inquiry'],
+    enum: ['Premium Steam Coal', 'Indian Coal', 'Indonesian Coal', 'Pet Coke', 'General Inquiry'],
     default: 'General Inquiry'
   },
   status: {

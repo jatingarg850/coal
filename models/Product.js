@@ -20,7 +20,7 @@ const ProductSchema = new mongoose.Schema({
   },
   category: {
     type: String,
-    enum: ['Steam Coal', 'Coking Coal', 'Thermal Coal', 'Anthracite Coal'],
+    enum: ['Premium Steam Coal', 'Indian Coal', 'Indonesian Coal', 'Pet Coke'],
     required: true
   },
   specifications: {
