@@ -11,6 +11,10 @@ export default function AdminDashboard() {
   const [showAddProduct, setShowAddProduct] = useState(false)
   const router = useRouter()
 
+  // Add state for editing product
+  const [editProduct, setEditProduct] = useState(null)
+  const [showEditProduct, setShowEditProduct] = useState(false)
+
   const coalImages = [
     '/images/WhatsApp Image 2025-09-04 at 14.10.26_3f88efa3.jpg',
     '/images/WhatsApp Image 2025-09-04 at 14.10.26_743110a8.jpg',
@@ -87,6 +91,50 @@ export default function AdminDashboard() {
     localStorage.removeItem('adminToken')
     localStorage.removeItem('adminData')
     router.push('/admin/login')
+  }
+
+  // Add product delete handler
+  const handleDeleteProduct = async (id) => {
+    if (!window.confirm('Are you sure you want to delete this product?')) return
+    try {
+      await fetch(`/api/products/${id}`, { method: 'DELETE' })
+      fetchData()
+    } catch (error) {
+      console.error('Error deleting product:', error)
+    }
+  }
+
+  // Add product edit handler
+  const handleEditProduct = (product) => {
+    setEditProduct(product)
+    setShowEditProduct(true)
+  }
+
+  const handleUpdateProduct = async (e) => {
+    e.preventDefault()
+    try {
+      await fetch(`/api/products/${editProduct._id}`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(editProduct)
+      })
+      setShowEditProduct(false)
+      setEditProduct(null)
+      fetchData()
+    } catch (error) {
+      console.error('Error updating product:', error)
+    }
+  }
+
+  // Add inquiry delete handler
+  const handleDeleteInquiry = async (id) => {
+    if (!window.confirm('Are you sure you want to delete this inquiry?')) return
+    try {
+      await fetch(`/api/inquiries/${id}`, { method: 'DELETE' })
+      fetchData()
+    } catch (error) {
+      console.error('Error deleting inquiry:', error)
+    }
   }
 
   if (loading) {
@@ -180,6 +228,20 @@ export default function AdminDashboard() {
                         </span>
                       )}
                     </div>
+                    <div className="flex justify-between items-center mt-4">
+                      <button
+                        onClick={() => handleEditProduct(product)}
+                        className="bg-blue-500 hover:bg-blue-600 text-white px-3 py-1 rounded text-xs mr-2"
+                      >
+                        Edit
+                      </button>
+                      <button
+                        onClick={() => handleDeleteProduct(product._id)}
+                        className="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded text-xs"
+                      >
+                        Delete
+                      </button>
+                    </div>
                   </div>
                 ))}
               </div>
@@ -195,24 +257,31 @@ export default function AdminDashboard() {
                     <tr>
                       <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Name</th>
                       <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Email</th>
+                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Phone</th>
+                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Company</th>
+                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Product Interest</th>
                       <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Message</th>
                       <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Date</th>
+                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Action</th>
                     </tr>
                   </thead>
                   <tbody className="bg-white divide-y divide-gray-200">
                     {inquiries.map((inquiry) => (
                       <tr key={inquiry._id}>
-                        <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                          {inquiry.name}
-                        </td>
+                        <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{inquiry.name}</td>
+                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{inquiry.email}</td>
+                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{inquiry.phone || '-'}</td>
+                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{inquiry.company || '-'}</td>
+                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{inquiry.productInterest || '-'}</td>
+                        <td className="px-6 py-4 text-sm text-gray-500">{inquiry.message}</td>
+                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{new Date(inquiry.createdAt).toLocaleDateString()}</td>
                         <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                          {inquiry.email}
-                        </td>
-                        <td className="px-6 py-4 text-sm text-gray-500">
-                          {inquiry.message.substring(0, 100)}...
-                        </td>
-                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                          {new Date(inquiry.createdAt).toLocaleDateString()}
+                          <button
+                            onClick={() => handleDeleteInquiry(inquiry._id)}
+                            className="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded text-xs"
+                          >
+                            Delete
+                          </button>
                         </td>
                       </tr>
                     ))}
@@ -294,6 +363,87 @@ export default function AdminDashboard() {
                   <button
                     type="button"
                     onClick={() => setShowAddProduct(false)}
+                    className="flex-1 bg-gray-300 hover:bg-gray-400 text-gray-700 py-2 px-4 rounded"
+                  >
+                    Cancel
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        )}
+
+        {/* Edit Product Modal */}
+        {showEditProduct && (
+          <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+            <div className="bg-white rounded-lg p-6 w-full max-w-md">
+              <h3 className="text-lg font-semibold mb-4">Edit Product</h3>
+              <form onSubmit={handleUpdateProduct} className="space-y-4">
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">Name</label>
+                  <input
+                    type="text"
+                    required
+                    value={editProduct.name}
+                    onChange={e => setEditProduct({ ...editProduct, name: e.target.value })}
+                    className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-orange-500"
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">Description</label>
+                  <textarea
+                    required
+                    value={editProduct.description}
+                    onChange={e => setEditProduct({ ...editProduct, description: e.target.value })}
+                    className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-orange-500"
+                    rows="3"
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">Image</label>
+                  <select
+                    value={editProduct.image}
+                    onChange={e => setEditProduct({ ...editProduct, image: e.target.value })}
+                    className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-orange-500"
+                  >
+                    {coalImages.map((image, index) => (
+                      <option key={index} value={image}>Coal Image {index + 1}</option>
+                    ))}
+                  </select>
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">Category</label>
+                  <select
+                    value={editProduct.category}
+                    onChange={e => setEditProduct({ ...editProduct, category: e.target.value })}
+                    className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-orange-500"
+                  >
+                    <option value="Premium Steam Coal">Premium Steam Coal</option>
+                    <option value="Indian Coal">Indian Coal</option>
+                    <option value="Indonesian Coal">Indonesian Coal</option>
+                    <option value="Pet Coke">Pet Coke</option>
+                  </select>
+                </div>
+                <div className="flex items-center">
+                  <input
+                    type="checkbox"
+                    id="featured-edit"
+                    checked={editProduct.featured}
+                    onChange={e => setEditProduct({ ...editProduct, featured: e.target.checked })}
+                    className="mr-2"
+                  />
+                  <label htmlFor="featured-edit" className="text-sm text-gray-700">Featured Product</label>
+                </div>
+                <div className="flex space-x-3 pt-4">
+                  <button
+                    type="submit"
+                    className="flex-1 bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded"
+                  >
+                    Update Product
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setShowEditProduct(false)}
                     className="flex-1 bg-gray-300 hover:bg-gray-400 text-gray-700 py-2 px-4 rounded"
                   >
                     Cancel
